@@ -1,0 +1,8 @@
+C:\Users\Ascendzor\Documents\Visual Studio 2010\Projects\NetworkPlay\NetworkPlay\NetworkPlay\bin\x86\Debug\Content\bullet.xnb
+C:\Users\Ascendzor\Documents\Visual Studio 2010\Projects\NetworkPlay\NetworkPlay\NetworkPlay\bin\x86\Debug\Content\tank.xnb
+C:\Users\Ascendzor\Documents\Visual Studio 2010\Projects\NetworkPlay\NetworkPlay\NetworkPlay\bin\x86\Debug\NetworkPlay.exe
+C:\Users\Ascendzor\Documents\Visual Studio 2010\Projects\NetworkPlay\NetworkPlay\NetworkPlay\bin\x86\Debug\NetworkPlay.pdb
+C:\Users\Ascendzor\Documents\Visual Studio 2010\Projects\NetworkPlay\NetworkPlay\NetworkPlay\obj\x86\Debug\NetworkPlay.csprojResolveAssemblyReference.cache
+C:\Users\Ascendzor\Documents\Visual Studio 2010\Projects\NetworkPlay\NetworkPlay\NetworkPlay\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\Users\Ascendzor\Documents\Visual Studio 2010\Projects\NetworkPlay\NetworkPlay\NetworkPlay\obj\x86\Debug\NetworkPlay.exe
+C:\Users\Ascendzor\Documents\Visual Studio 2010\Projects\NetworkPlay\NetworkPlay\NetworkPlay\obj\x86\Debug\NetworkPlay.pdb
