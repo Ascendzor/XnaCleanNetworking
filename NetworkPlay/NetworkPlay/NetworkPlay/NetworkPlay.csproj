@@ -108,17 +108,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Client.cs" />
-    <Compile Include="Host.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Game1.cs" />
-    <Compile Include="Toon.cs" />
+    <Compile Include="TestObject.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />
     <Content Include="GameThumbnail.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Objects\Objects.csproj">
+      <Project>{46D9EC0C-320F-4F89-9504-78021332364E}</Project>
+      <Name>Objects</Name>
+    </ProjectReference>
     <ProjectReference Include="..\NetworkPlayContent\NetworkPlayContent.contentproj">
       <Name>NetworkPlayContent</Name>
       <XnaReferenceType>Content</XnaReferenceType>

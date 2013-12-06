@@ -7,58 +7,56 @@ using System.Net.Sockets;
 using System.Threading;
 using Microsoft.Xna.Framework;
 using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Runtime.Serialization;
+using Objects;
 
 namespace NetworkPlay
 {
     class Client
     {
         private Toon me;
-        private Toon him;
 
-        private Socket socket;
-        private IPAddress sendToIp;
-        private IPEndPoint sendToPoint;
-
-        public Client(Toon me, Toon him)
+        public Client(Toon me)
         {
             this.me = me;
-            this.him = him;
 
-            socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
-            sendToIp = IPAddress.Parse("192.168.0.255");
-            sendToPoint = new IPEndPoint(sendToIp, 41338);
-
-            new Thread(new ThreadStart(listener)).Start();
+            new Thread(new ThreadStart(Send)).Start();
+            
+            new Thread(new ThreadStart(Listen)).Start();
         }
 
-        public void sendData()
+        public void Listen()
         {
-            MemoryStream binaryBuffer = new MemoryStream();
-            using (BinaryWriter bw = new BinaryWriter(binaryBuffer))
-            {
-                bw.Write(me.GetPosition().X);
-                bw.Write(me.GetPosition().Y);
-            }
+            UdpClient udp = new UdpClient(41000);
+            IPEndPoint groupEp = new IPEndPoint(IPAddress.Any, 41000);
 
-            byte[] messageBuffer = binaryBuffer.ToArray();
-
-            socket.SendTo(messageBuffer, sendToPoint);
-        }
-
-        public void listener()
-        {
-            UdpClient udp = new UdpClient(41337);
-            IPEndPoint groupEp = new IPEndPoint(IPAddress.Any, 41337);
             while (true)
             {
-                byte[] receivedBytes = udp.Receive(ref groupEp);
+                Dictionary<Guid, Toon> givenToons;
+                using (MemoryStream ms = new MemoryStream(udp.Receive(ref groupEp)))
+                {
+                    givenToons = (Dictionary<Guid, Toon>)(new BinaryFormatter().Deserialize(ms));
+                }
 
-                byte[] xValue = new byte[4];
-                Buffer.BlockCopy(receivedBytes, 0, xValue, 0, 4);
-                byte[] yValue = new byte[4];
-                Buffer.BlockCopy(receivedBytes, 4, yValue, 0, 4);
+                Game1.them = givenToons;
+            }
+        }
 
-                him.SetPosition(new Vector2(BitConverter.ToSingle(xValue, 0), BitConverter.ToSingle(yValue, 0)));
+        public void Send()
+        {
+            Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
+            IPEndPoint sendToPoint = new IPEndPoint(IPAddress.Parse("192.168.0.255"), 42000);
+            while (true)
+            {
+                BinaryFormatter bf = new BinaryFormatter();
+                MemoryStream ms = new MemoryStream();
+                bf.Serialize(ms, me);
+
+                socket.SendTo(ms.ToArray(), sendToPoint);
+
+                ms.Close();
+                Thread.Sleep(10);
             }
         }
     }

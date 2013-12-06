@@ -1,1 +1,2 @@
 C:\Users\Ascendzor\Documents\Visual Studio 2010\Projects\NetworkPlay\NetworkPlay\NetworkPlayContent\obj\x86\Debug\NetworkPlayContent.contentprojResolveAssemblyReference.cache
+C:\Users\Public\Programming\XnaCleanNetworking\NetworkPlay\NetworkPlay\NetworkPlayContent\obj\x86\Debug\NetworkPlayContent.contentprojResolveAssemblyReference.cache

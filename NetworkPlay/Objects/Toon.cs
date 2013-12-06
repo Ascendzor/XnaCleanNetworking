@@ -9,17 +9,20 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 
-
-namespace NetworkPlay
+namespace Objects
 {
-    class Toon
+    [Serializable()]
+    public class Toon
     {
+        public Guid id;
+        [NonSerializedAttribute]
         private Texture2D texture;
         private Vector2 position;
         private float movementSpeed;
 
         public Toon(Texture2D texture, Vector2 position)
         {
+            this.id = Guid.NewGuid();
             this.texture = texture;
             this.position = position;
 
@@ -46,9 +49,9 @@ namespace NetworkPlay
             }
         }
 
-        public void Draw(SpriteBatch sb)
+        public void Draw(SpriteBatch sb, Texture2D textureGiven)
         {
-            sb.Draw(texture, position, Color.White);
+            sb.Draw(textureGiven, position, Color.White);
         }
 
         public void SetPosition(Vector2 position)

@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using Objects;
 
 namespace NetworkPlay
 {
@@ -20,13 +21,7 @@ namespace NetworkPlay
         SpriteBatch spriteBatch;
 
         Toon me;
-        Toon him;
-
-        Host host;
-        Client client;
-        
-        enum States { start, playing }
-        States state;
+        public static Dictionary<Guid, Toon> them;
 
         public Game1()
         {
@@ -37,9 +32,9 @@ namespace NetworkPlay
         protected override void Initialize()
         {
             me = new Toon(Content.Load<Texture2D>("tank"), new Vector2(100, 100));
-            him = new Toon(Content.Load<Texture2D>("bullet"), new Vector2(300, 300));
+            them = new Dictionary<Guid, Toon>();
 
-            state = States.start;
+            Client client = new Client(me);
 
             base.Initialize();
         }
@@ -55,31 +50,7 @@ namespace NetworkPlay
 
         protected override void Update(GameTime gameTime)
         {
-            if (state == States.start)
-            {
-                if (Keyboard.GetState().IsKeyDown(Keys.C))
-                {
-                    client = new Client(me, him);
-                    state = States.playing;
-                }
-                if (Keyboard.GetState().IsKeyDown(Keys.H))
-                {
-                    host = new Host(me, him);
-                    state = States.playing;
-                }
-            }
-            else if (state == States.playing)
-            {
-                if (client == null)
-                {
-                    host.sendData();
-                }
-                else
-                {
-                    client.sendData();
-                }
-                me.Update();
-            }
+            me.Update();
 
             base.Update(gameTime);
         }
@@ -90,15 +61,14 @@ namespace NetworkPlay
 
             spriteBatch.Begin();
 
-            if (state == States.start)
+            foreach (Guid key in them.Keys)
             {
-                //draw texture to say choose host or client
+                Console.WriteLine("le vasheesh");
+                them[key].Draw(spriteBatch, Content.Load<Texture2D>("tank"));
             }
-            else
-            {
-                me.Draw(spriteBatch);
-                him.Draw(spriteBatch);
-            }
+            Console.WriteLine(them.Count);
+            me.Draw(spriteBatch, Content.Load<Texture2D>("tank"));
+            
 
             spriteBatch.End();
 

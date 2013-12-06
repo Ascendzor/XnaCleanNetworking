@@ -1,0 +1,13 @@
+C:\Users\Public\Programming\XnaCleanNetworking\NetworkPlay\Objects\bin\Debug\Objects.dll
+C:\Users\Public\Programming\XnaCleanNetworking\NetworkPlay\Objects\bin\Debug\Objects.pdb
+C:\Users\Public\Programming\XnaCleanNetworking\NetworkPlay\Objects\bin\Debug\Microsoft.Xna.Framework.dll
+C:\Users\Public\Programming\XnaCleanNetworking\NetworkPlay\Objects\bin\Debug\Microsoft.Xna.Framework.Game.dll
+C:\Users\Public\Programming\XnaCleanNetworking\NetworkPlay\Objects\bin\Debug\Microsoft.Xna.Framework.Graphics.dll
+C:\Users\Public\Programming\XnaCleanNetworking\NetworkPlay\Objects\bin\Debug\Microsoft.Xna.Framework.Xact.dll
+C:\Users\Public\Programming\XnaCleanNetworking\NetworkPlay\Objects\bin\Debug\Microsoft.Xna.Framework.xml
+C:\Users\Public\Programming\XnaCleanNetworking\NetworkPlay\Objects\bin\Debug\Microsoft.Xna.Framework.Game.xml
+C:\Users\Public\Programming\XnaCleanNetworking\NetworkPlay\Objects\bin\Debug\Microsoft.Xna.Framework.Graphics.xml
+C:\Users\Public\Programming\XnaCleanNetworking\NetworkPlay\Objects\bin\Debug\Microsoft.Xna.Framework.Xact.xml
+C:\Users\Public\Programming\XnaCleanNetworking\NetworkPlay\Objects\obj\Debug\Objects.dll
+C:\Users\Public\Programming\XnaCleanNetworking\NetworkPlay\Objects\obj\Debug\Objects.pdb
+C:\Users\Public\Programming\XnaCleanNetworking\NetworkPlay\Objects\obj\Debug\Objects.csprojResolveAssemblyReference.cache

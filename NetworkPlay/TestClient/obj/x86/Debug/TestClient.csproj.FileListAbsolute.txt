@@ -1,0 +1,6 @@
+C:\Users\Public\Programming\XnaCleanNetworking\NetworkPlay\TestClient\bin\Debug\TestClient.exe
+C:\Users\Public\Programming\XnaCleanNetworking\NetworkPlay\TestClient\bin\Debug\TestClient.pdb
+C:\Users\Public\Programming\XnaCleanNetworking\NetworkPlay\TestClient\bin\Debug\NetworkCommsDotNetComplete.dll
+C:\Users\Public\Programming\XnaCleanNetworking\NetworkPlay\TestClient\obj\x86\Debug\TestClient.exe
+C:\Users\Public\Programming\XnaCleanNetworking\NetworkPlay\TestClient\obj\x86\Debug\TestClient.pdb
+C:\Users\Public\Programming\XnaCleanNetworking\NetworkPlay\TestClient\obj\x86\Debug\TestClient.csprojResolveAssemblyReference.cache

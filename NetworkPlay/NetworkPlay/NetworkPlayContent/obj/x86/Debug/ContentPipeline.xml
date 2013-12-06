@@ -7,7 +7,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Ascendzor\Documents\Visual Studio 2010\Projects\NetworkPlay\NetworkPlay\NetworkPlay\bin\x86\Debug\Content\bullet.xnb</Output>
+      <Output>C:\Users\Public\Programming\XnaCleanNetworking\NetworkPlay\NetworkPlay\NetworkPlay\bin\x86\Debug\Content\bullet.xnb</Output>
       <Time>2013-12-03T18:53:40.513319-08:00</Time>
     </Item>
     <Item>
@@ -16,7 +16,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Ascendzor\Documents\Visual Studio 2010\Projects\NetworkPlay\NetworkPlay\NetworkPlay\bin\x86\Debug\Content\tank.xnb</Output>
+      <Output>C:\Users\Public\Programming\XnaCleanNetworking\NetworkPlay\NetworkPlay\NetworkPlay\bin\x86\Debug\Content\tank.xnb</Output>
       <Time>2013-12-03T18:53:40.5143188-08:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
@@ -25,10 +25,10 @@
       <TargetProfile>HiDef</TargetProfile>
       <BuildConfiguration>Debug</BuildConfiguration>
       <CompressContent>false</CompressContent>
-      <RootDirectory>C:\Users\Ascendzor\Documents\Visual Studio 2010\Projects\NetworkPlay\NetworkPlay\NetworkPlayContent\</RootDirectory>
-      <LoggerRootDirectory>C:\Users\Ascendzor\Documents\Visual Studio 2010\Projects\NetworkPlay\NetworkPlay\NetworkPlay\</LoggerRootDirectory>
-      <IntermediateDirectory>C:\Users\Ascendzor\Documents\Visual Studio 2010\Projects\NetworkPlay\NetworkPlay\NetworkPlayContent\obj\x86\Debug\</IntermediateDirectory>
-      <OutputDirectory>C:\Users\Ascendzor\Documents\Visual Studio 2010\Projects\NetworkPlay\NetworkPlay\NetworkPlay\bin\x86\Debug\Content\</OutputDirectory>
+      <RootDirectory>C:\Users\Public\Programming\XnaCleanNetworking\NetworkPlay\NetworkPlay\NetworkPlayContent\</RootDirectory>
+      <LoggerRootDirectory>C:\Users\Public\Programming\XnaCleanNetworking\NetworkPlay\NetworkPlay\NetworkPlay\</LoggerRootDirectory>
+      <IntermediateDirectory>C:\Users\Public\Programming\XnaCleanNetworking\NetworkPlay\NetworkPlay\NetworkPlayContent\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>C:\Users\Public\Programming\XnaCleanNetworking\NetworkPlay\NetworkPlay\NetworkPlay\bin\x86\Debug\Content\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>

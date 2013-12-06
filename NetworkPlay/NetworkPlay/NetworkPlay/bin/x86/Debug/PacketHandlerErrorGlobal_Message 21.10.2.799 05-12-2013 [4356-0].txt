@@ -1,0 +1,1 @@
+Base Exception Type: DPSBase.UnexpectedPacketTypeException: The received packet type 'Message' has no configured handler and network comms is not set to ignore unknown packet types. Set NetworkComms.IgnoreUnknownPacketTypes=true to prevent this error.
