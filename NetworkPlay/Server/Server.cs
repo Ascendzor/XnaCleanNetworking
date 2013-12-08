@@ -20,94 +20,86 @@ namespace Server
 {
     class Server
     {
-        Dictionary<Guid, Toon> toons;
-
-        string networkBroadcast;
+        private int port;
+        private List<NetworkStream> streams;
+        private TcpListener listener;
 
         public Server()
         {
-            toons = new Dictionary<Guid, Toon>();
+            port = 41337;
+            streams = new List<NetworkStream>();
+            listener = new TcpListener(port);
+
+            new Thread(ListenForNewDudes).Start();
         }
 
-        public void Run()
+        public void ListenForNewDudes()
         {
-            GetNetworkIp();
-            new Thread(new ThreadStart(Listen)).Start();
-
-            Send();
-
-            Console.ReadLine();
-        }
-
-        public void Send()
-        {
-            Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
-            IPEndPoint sendToPoint = new IPEndPoint(IPAddress.Parse("192.168.0.255"), 41000);
-
-            BinaryFormatter bf = new BinaryFormatter();
+            listener.Start();
 
             while (true)
             {
-                MemoryStream ms = new MemoryStream();
-                bf.Serialize(ms, toons);
+                NetworkStream stream = listener.AcceptTcpClient().GetStream();
+                streams.Add(stream);
 
-                socket.SendTo(ms.ToArray(), sendToPoint);
-
-                ms.Close();
-                Console.WriteLine(toons.Count);
-                Thread.Sleep(10);
-            }
-
-            
-        }
-
-        public void Listen()
-        {
-            UdpClient udp = new UdpClient(42000);
-            IPEndPoint groupEp = new IPEndPoint(IPAddress.Any, 42000);
-
-            while (true)
-            {
-                Toon givenToon;
-                using (MemoryStream ms = new MemoryStream(udp.Receive(ref groupEp)))
-                {
-                    givenToon = (Toon)(new BinaryFormatter().Deserialize(ms));
-                }
-
-                //if this is a new player
-                //else update the toon with what he said he is
-                if (!toons.ContainsKey(givenToon.id))
-                {
-                    toons.Add(givenToon.id, givenToon);
-                }
-                else
-                {
-                    toons[givenToon.id] = givenToon;
-                }
+                new Thread(() => Listen(stream)).Start();
             }
         }
 
-        public void GetNetworkIp()
+        public void Listen(NetworkStream stream)
         {
-            Console.WriteLine("Please enter the network's broadcast IP: ");
-            networkBroadcast = Console.ReadLine();
+            int i;
 
-            //if it's not a valid IP then kill the process
+            byte[] bytes = new byte[1024];
+
             try
             {
-                IPAddress.Parse(networkBroadcast);
+                while ((i = stream.Read(bytes, 0, bytes.Length)) != 0)
+                {
+                    byte[] arrBytes = bytes;
+                    MemoryStream memStream = new MemoryStream();
+                    memStream.Write(arrBytes, 0, arrBytes.Length);
+                    memStream.Seek(0, SeekOrigin.Begin);
+                    Event leEvent = (Event)new BinaryFormatter().Deserialize(memStream);
+
+                    Console.WriteLine("received event: " + (Vector2)leEvent.value);
+                    Console.WriteLine("from: " + leEvent.id);
+
+                    if (leEvent.type == 0)
+                    {
+                        Vector2 thePosition = (Vector2)leEvent.value;
+                        Console.WriteLine(thePosition);
+                    }
+
+                    Send(leEvent);
+                }
             }
             catch (Exception e)
             {
-                Console.WriteLine("You entered the wrong IP and you should feel bad");
-                Thread.Sleep(2000);
-                Thread.CurrentThread.Abort();
+                Console.WriteLine("something died :( Server=>Listen(NetworkStream)");
+            }
+        }
+
+        public void Send(Event leEvent)
+        {
+            foreach (NetworkStream stream in streams)
+            {
+                try
+                {
+                    MemoryStream ms = new MemoryStream();
+                    new BinaryFormatter().Serialize(ms, leEvent);
+                    stream.Write(ms.ToArray(), 0, ms.ToArray().Length);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("something died :( Server=>Send(Event)");
+                }
             }
         }
 
         static void Main(string[] args)
         {
-            new Server().Run();
+            new Server();
         }
     }
 }

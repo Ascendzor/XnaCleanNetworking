@@ -15,49 +15,81 @@ namespace NetworkPlay
 {
     class Client
     {
-        private Toon me;
+        int port;
+        NetworkStream stream;
+        TcpClient client;
+        IPAddress server;
 
-        public Client(Toon me)
+        public Client()
         {
-            this.me = me;
+            port = 41337;
+            new Thread(Connect).Start();
+            Connect();
 
-            new Thread(new ThreadStart(Send)).Start();
-            
-            new Thread(new ThreadStart(Listen)).Start();
+            new Thread(Listen).Start();
         }
 
         public void Listen()
         {
-            UdpClient udp = new UdpClient(41000);
-            IPEndPoint groupEp = new IPEndPoint(IPAddress.Any, 41000);
+            int i;
 
-            while (true)
+            byte[] bytes = new byte[1024];
+
+            try
             {
-                Dictionary<Guid, Toon> givenToons;
-                using (MemoryStream ms = new MemoryStream(udp.Receive(ref groupEp)))
+                while ((i = stream.Read(bytes, 0, bytes.Length)) != 0)
                 {
-                    givenToons = (Dictionary<Guid, Toon>)(new BinaryFormatter().Deserialize(ms));
-                }
+                    byte[] arrBytes = bytes;
+                    MemoryStream memStream = new MemoryStream();
+                    memStream.Write(arrBytes, 0, arrBytes.Length);
+                    memStream.Seek(0, SeekOrigin.Begin);
+                    Event leEvent = (Event)new BinaryFormatter().Deserialize(memStream);
 
-                Game1.them = givenToons;
+                    if (!Game1.them.ContainsKey(leEvent.id))
+                    {
+                        Game1.them.Add(leEvent.id, new Toon((Vector2)leEvent.value));
+                    }
+                    else
+                    {
+                        Game1.them[leEvent.id].SetGoal((Vector2)leEvent.value);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("something died :( Client=>Listen()");
             }
         }
 
-        public void Send()
+        public void SubmitEvent(Event leEvent)
         {
-            Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
-            IPEndPoint sendToPoint = new IPEndPoint(IPAddress.Parse("192.168.0.255"), 42000);
-            while (true)
+            MemoryStream ms = new MemoryStream();
+            try
             {
-                BinaryFormatter bf = new BinaryFormatter();
-                MemoryStream ms = new MemoryStream();
-                bf.Serialize(ms, me);
+                new BinaryFormatter().Serialize(ms, leEvent);
 
-                socket.SendTo(ms.ToArray(), sendToPoint);
+                byte[] bytes = ms.ToArray();
+                stream.Write(bytes, 0, bytes.Length);
 
                 ms.Close();
-                Thread.Sleep(10);
             }
+            catch (Exception e)
+            {
+                Console.WriteLine("something died :( Client=>SubmitEvent(Event)");
+            }
+        }
+
+        public void Connect()
+        {
+            client = new TcpClient("192.168.1.123", port);
+
+            stream = client.GetStream();
+        }
+
+        public void Disconnect()
+        {
+            stream.Close();
+            client.Close();
         }
     }
 }

@@ -7,6 +7,5 @@ C:\Users\Public\Programming\XnaCleanNetworking\NetworkPlay\Server\bin\Debug\Netw
 C:\Users\Public\Programming\XnaCleanNetworking\NetworkPlay\Server\bin\Debug\NetworkPlay.pdb
 C:\Users\Public\Programming\XnaCleanNetworking\NetworkPlay\Server\obj\x86\Debug\Server.exe
 C:\Users\Public\Programming\XnaCleanNetworking\NetworkPlay\Server\obj\x86\Debug\Server.pdb
-C:\Users\Public\Programming\XnaCleanNetworking\NetworkPlay\Server\bin\Debug\NetworkCommsDotNetComplete.dll
 C:\Users\Public\Programming\XnaCleanNetworking\NetworkPlay\Server\bin\Debug\Objects.dll
 C:\Users\Public\Programming\XnaCleanNetworking\NetworkPlay\Server\bin\Debug\Objects.pdb

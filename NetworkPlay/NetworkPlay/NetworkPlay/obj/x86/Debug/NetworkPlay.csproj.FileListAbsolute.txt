@@ -16,3 +16,7 @@ C:\Users\Public\Programming\XnaCleanNetworking\NetworkPlay\NetworkPlay\NetworkPl
 C:\Users\Public\Programming\XnaCleanNetworking\NetworkPlay\NetworkPlay\NetworkPlay\obj\x86\Debug\NetworkPlay.pdb
 C:\Users\Public\Programming\XnaCleanNetworking\NetworkPlay\NetworkPlay\NetworkPlay\bin\x86\Debug\Objects.dll
 C:\Users\Public\Programming\XnaCleanNetworking\NetworkPlay\NetworkPlay\NetworkPlay\bin\x86\Debug\Objects.pdb
+C:\Users\Public\Programming\XnaCleanNetworking\NetworkPlay\NetworkPlay\NetworkPlay\bin\x86\Debug\NetworkPlay.exe.manifest
+C:\Users\Public\Programming\XnaCleanNetworking\NetworkPlay\NetworkPlay\NetworkPlay\bin\x86\Debug\NetworkPlay.application
+C:\Users\Public\Programming\XnaCleanNetworking\NetworkPlay\NetworkPlay\NetworkPlay\obj\x86\Debug\NetworkPlay.exe.manifest
+C:\Users\Public\Programming\XnaCleanNetworking\NetworkPlay\NetworkPlay\NetworkPlay\obj\x86\Debug\NetworkPlay.application

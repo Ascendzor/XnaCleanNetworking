@@ -15,18 +15,22 @@ namespace Objects
     public class Toon
     {
         public Guid id;
-        [NonSerializedAttribute]
-        private Texture2D texture;
         private Vector2 position;
         private float movementSpeed;
+        private Vector2 goalPosition;
 
-        public Toon(Texture2D texture, Vector2 position)
+        public Toon(Vector2 position)
         {
             this.id = Guid.NewGuid();
-            this.texture = texture;
             this.position = position;
+            this.goalPosition = position;
 
             this.movementSpeed = 10f;
+        }
+
+        public void SubmitEvent(Event leEvent)
+        {
+            goalPosition = (Vector2)leEvent.value;
         }
 
         public void Update()
@@ -47,6 +51,15 @@ namespace Objects
             {
                 position.X += movementSpeed;
             }
+
+            Vector2 direction = goalPosition - position;
+            if (direction.Length() > 10)
+            {
+                Console.WriteLine("direction: " + direction);
+                direction.Normalize();
+
+                position += direction * movementSpeed;
+            }
         }
 
         public void Draw(SpriteBatch sb, Texture2D textureGiven)
@@ -57,6 +70,11 @@ namespace Objects
         public void SetPosition(Vector2 position)
         {
             this.position = position;
+        }
+
+        public void SetGoal(Vector2 goal)
+        {
+            goalPosition = goal;
         }
 
         public Vector2 GetPosition()

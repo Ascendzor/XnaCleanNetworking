@@ -20,6 +20,8 @@ namespace NetworkPlay
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
+        Input input;
+
         Toon me;
         public static Dictionary<Guid, Toon> them;
 
@@ -31,10 +33,14 @@ namespace NetworkPlay
 
         protected override void Initialize()
         {
-            me = new Toon(Content.Load<Texture2D>("tank"), new Vector2(100, 100));
+            me = new Toon(new Vector2(100, 100));
             them = new Dictionary<Guid, Toon>();
 
-            Client client = new Client(me);
+            IsMouseVisible = true;
+
+
+            Client client = new Client();
+            input = new Input(client, me);
 
             base.Initialize();
         }
@@ -50,6 +56,11 @@ namespace NetworkPlay
 
         protected override void Update(GameTime gameTime)
         {
+            input.Update();
+            foreach (Guid key in them.Keys)
+            {
+                them[key].Update();
+            }
             me.Update();
 
             base.Update(gameTime);
@@ -63,10 +74,8 @@ namespace NetworkPlay
 
             foreach (Guid key in them.Keys)
             {
-                Console.WriteLine("le vasheesh");
                 them[key].Draw(spriteBatch, Content.Load<Texture2D>("tank"));
             }
-            Console.WriteLine(them.Count);
             me.Draw(spriteBatch, Content.Load<Texture2D>("tank"));
             
 
